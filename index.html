@@ -36,8 +36,14 @@ section {
   justify-content: center;
 }
 
-h1 {
-  font-family: 'Playfair Display', serif;
+.btn {
+  background: #8b6f47;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
 }
 
 .card {
@@ -48,18 +54,10 @@ h1 {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.btn {
-  background: #8b6f47;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-}
-
 .gallery img {
   width: 100%;
-  border-radius: 10px;
   margin: 10px 0;
+  border-radius: 10px;
 }
 
 .fade {
@@ -73,58 +71,76 @@ h1 {
   transform: translateY(0);
 }
 
+.opening {
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
 .countdown {
-  font-size: 20px;
   font-weight: bold;
-  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 MUSIK -->
-<audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+<!-- OPENING -->
+<div class="opening" id="opening">
+  <h2>Undangan Pernikahan</h2>
+  <p id="guest"></p>
+  <button class="btn" onclick="openInvite()">Buka Undangan</button>
+</div>
+
+<!-- MUSIK -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
 <div class="container">
 
-<!-- COVER -->
 <section class="cover">
   <h1>Nama Pria & Nama Wanita</h1>
-  <p>Katur dhumateng Bapak/Ibu/Saudara/i</p>
 </section>
 
-<!-- COUNTDOWN -->
 <section class="fade">
   <div class="card">
-    <h2>⏳ Menuju Hari Bahagia</h2>
+    <h2>⏳ Countdown</h2>
     <div id="countdown" class="countdown"></div>
   </div>
 </section>
 
-<!-- MEMPELAI -->
 <section class="fade">
   <div class="card">
     <h2>💍 Penganten</h2>
-    <p><b>Nama Pria</b><br>Putra Bapak ... & Ibu ...</p>
-    <p><b>Nama Wanita</b><br>Putri Bapak ... & Ibu ...</p>
+    <p><b>Nama Pria</b><br>Putra Bapak ...</p>
+    <p><b>Nama Wanita</b><br>Putri Bapak ...</p>
   </div>
 </section>
 
-<!-- LOKASI -->
 <section class="fade">
   <div class="card">
-    <h2>📍 Wektu & Papan</h2>
-    <p>Setu, 10 Mei 2026</p>
-    <p>Gedung Serbaguna</p>
-    <br>
-    <a class="btn" href="https://maps.google.com" target="_blank">Deleng Lokasi</a>
+    <h2>📍 Lokasi</h2>
+    <a class="btn" href="https://maps.google.com" target="_blank">Google Maps</a>
   </div>
 </section>
 
-<!-- GALLERY -->
 <section class="fade">
   <div class="card gallery">
     <h2>📸 Our Memories</h2>
@@ -133,41 +149,68 @@ h1 {
   </div>
 </section>
 
-<!-- DOA -->
 <section class="fade">
   <div class="card">
-    <h2>🙏 Pangajab</h2>
-    <p>Mugi dados kulawarga sakinah mawaddah warahmah</p>
+    <h2>💌 RSVP & Ucapan</h2>
+    <input type="text" id="nama" placeholder="Nama">
+    <textarea id="pesan" placeholder="Ucapan..."></textarea>
+    <button class="btn" onclick="kirimUcapan()">Kirim</button>
+    <div id="listUcapan"></div>
+  </div>
+</section>
+
+<section class="fade">
+  <div class="card">
+    <h2>🎁 Wedding Gift</h2>
+    <p>Bank BCA</p>
+    <p>1234567890</p>
+    <p>a.n. Nama</p>
   </div>
 </section>
 
 </div>
 
 <script>
+// buka undangan
+function openInvite(){
+  document.getElementById("opening").style.display="none";
+  document.getElementById("music").play();
+}
+
+// nama tamu dari URL
+const urlParams = new URLSearchParams(window.location.search);
+const guest = urlParams.get('to');
+if(guest){
+  document.getElementById("guest").innerText = "Kepada Yth: " + guest;
+}
+
+// animasi scroll
 const fades = document.querySelectorAll('.fade');
 window.addEventListener('scroll', () => {
   fades.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 50){
+    if(el.getBoundingClientRect().top < window.innerHeight - 50){
       el.classList.add('show');
     }
   });
 });
 
-// COUNTDOWN
-const targetDate = new Date("May 10, 2026 10:00:00").getTime();
-
+// countdown
+const targetDate = new Date("May 10, 2026").getTime();
 setInterval(() => {
   const now = new Date().getTime();
-  const distance = targetDate - now;
+  const d = targetDate - now;
+  const hari = Math.floor(d/(1000*60*60*24));
+  document.getElementById("countdown").innerText = hari + " hari lagi";
+},1000);
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((distance / 1000 / 60) % 60);
+// ucapan (local)
+function kirimUcapan(){
+  const nama = document.getElementById("nama").value;
+  const pesan = document.getElementById("pesan").value;
+  const list = document.getElementById("listUcapan");
 
-  document.getElementById("countdown").innerHTML =
-    days + " hari " + hours + " jam " + minutes + " menit";
-}, 1000);
+  list.innerHTML += "<p><b>"+nama+"</b><br>"+pesan+"</p>";
+}
 </script>
 
 </body>
