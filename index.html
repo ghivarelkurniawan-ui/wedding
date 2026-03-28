@@ -19,8 +19,6 @@ body {
   max-width: 420px;
   margin: auto;
   background: white;
-  min-height: 100vh;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
 section {
@@ -28,12 +26,11 @@ section {
 }
 
 .cover {
+  height: 100vh;
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
   url('https://images.unsplash.com/photo-1519741497674-611481863552');
   background-size: cover;
-  background-position: center;
   color: white;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,33 +38,28 @@ section {
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
-}
-
-h2 {
-  font-size: 22px;
-}
-
-p {
-  font-size: 14px;
 }
 
 .card {
-  background: #fff;
-  margin: 20px 0;
-  padding: 25px;
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .btn {
-  display: inline-block;
-  padding: 10px 20px;
   background: #8b6f47;
   color: white;
-  text-decoration: none;
+  padding: 10px 20px;
   border-radius: 20px;
-  margin-top: 10px;
+  text-decoration: none;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
 }
 
 .fade {
@@ -80,60 +72,72 @@ p {
   opacity: 1;
   transform: translateY(0);
 }
+
+.countdown {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 MUSIK -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
 
+<!-- COVER -->
 <section class="cover">
-  <p>Undangan Pernikahan</p>
   <h1>Nama Pria & Nama Wanita</h1>
-  <p>Katur dhumateng</p>
-  <p>Bapak/Ibu/Saudara/i</p>
+  <p>Katur dhumateng Bapak/Ibu/Saudara/i</p>
 </section>
 
+<!-- COUNTDOWN -->
 <section class="fade">
   <div class="card">
-    <h2>ꦩꦁꦒꦭꦤ꧀</h2>
-    <p>
-    Kanthi rahmat lan ridho Gusti Allah SWT,  
-    kulo badhe ngawontenaken pahargyan pernikahan:
-    </p>
+    <h2>⏳ Menuju Hari Bahagia</h2>
+    <div id="countdown" class="countdown"></div>
+  </div>
+</section>
+
+<!-- MEMPELAI -->
+<section class="fade">
+  <div class="card">
+    <h2>💍 Penganten</h2>
     <p><b>Nama Pria</b><br>Putra Bapak ... & Ibu ...</p>
     <p><b>Nama Wanita</b><br>Putri Bapak ... & Ibu ...</p>
   </div>
 </section>
 
+<!-- LOKASI -->
 <section class="fade">
   <div class="card">
-    <h2>📅 Wektu & Papan</h2>
+    <h2>📍 Wektu & Papan</h2>
     <p>Setu, 10 Mei 2026</p>
-    <p>Pukul 10.00 WIB</p>
     <p>Gedung Serbaguna</p>
+    <br>
     <a class="btn" href="https://maps.google.com" target="_blank">Deleng Lokasi</a>
   </div>
 </section>
 
+<!-- GALLERY -->
 <section class="fade">
-  <div class="card">
-    <h2>💍 Pangajab</h2>
-    <p>
-    Mugi-mugi tansah pinaringan berkah  
-    lan dados kulawarga sakinah, mawaddah, warahmah.
-    </p>
+  <div class="card gallery">
+    <h2>📸 Our Memories</h2>
+    <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
   </div>
 </section>
 
+<!-- DOA -->
 <section class="fade">
   <div class="card">
-    <h2>🙏 Panutup</h2>
-    <p>
-    Mugi kersa rawuh lan maringi donga pangestu  
-    dhumateng penganten.
-    </p>
-    <p><b>Matur nuwun</b></p>
+    <h2>🙏 Pangajab</h2>
+    <p>Mugi dados kulawarga sakinah mawaddah warahmah</p>
   </div>
 </section>
 
@@ -141,7 +145,6 @@ p {
 
 <script>
 const fades = document.querySelectorAll('.fade');
-
 window.addEventListener('scroll', () => {
   fades.forEach(el => {
     const top = el.getBoundingClientRect().top;
@@ -150,6 +153,21 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+// COUNTDOWN
+const targetDate = new Date("May 10, 2026 10:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / 1000 / 60) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    days + " hari " + hours + " jam " + minutes + " menit";
+}, 1000);
 </script>
 
 </body>
