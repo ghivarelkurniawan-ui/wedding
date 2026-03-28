@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wedding Invitation</title>
+<title>Undangan Pernikahan</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
 
@@ -11,22 +11,29 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #fdfaf6;
-  color: #333;
+  background: #f7f3ef;
   text-align: center;
 }
 
+.container {
+  max-width: 420px;
+  margin: auto;
+  background: white;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
 section {
-  padding: 60px 20px;
+  padding: 40px 20px;
 }
 
 .cover {
-  height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-              url('https://images.unsplash.com/photo-1520857014576-2c4f4c972b57');
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url('https://images.unsplash.com/photo-1519741497674-611481863552');
   background-size: cover;
   background-position: center;
   color: white;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,35 +41,33 @@ section {
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 40px;
-  margin: 10px 0;
+  font-size: 32px;
 }
 
 h2 {
-  font-size: 28px;
+  font-size: 22px;
 }
 
 p {
-  font-size: 16px;
+  font-size: 14px;
+}
+
+.card {
+  background: #fff;
+  margin: 20px 0;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 .btn {
   display: inline-block;
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #d4af37;
+  padding: 10px 20px;
+  background: #8b6f47;
   color: white;
   text-decoration: none;
-  border-radius: 25px;
-}
-
-.card {
-  background: white;
-  margin: 20px auto;
-  padding: 30px;
   border-radius: 20px;
-  max-width: 400px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-top: 10px;
 }
 
 .fade {
@@ -80,33 +85,59 @@ p {
 
 <body>
 
+<div class="container">
+
 <section class="cover">
-  <h1>The Wedding Of</h1>
-  <h2>Nama Pria & Nama Wanita</h2>
-  <p>Kepada Yth: Tamu Undangan</p>
+  <p>Undangan Pernikahan</p>
+  <h1>Nama Pria & Nama Wanita</h1>
+  <p>Katur dhumateng</p>
+  <p>Bapak/Ibu/Saudara/i</p>
 </section>
 
 <section class="fade">
   <div class="card">
-    <h2>💍 Save The Date</h2>
-    <p>Sabtu, 10 Mei 2026</p>
+    <h2>ꦩꦁꦒꦭꦤ꧀</h2>
+    <p>
+    Kanthi rahmat lan ridho Gusti Allah SWT,  
+    kulo badhe ngawontenaken pahargyan pernikahan:
+    </p>
+    <p><b>Nama Pria</b><br>Putra Bapak ... & Ibu ...</p>
+    <p><b>Nama Wanita</b><br>Putri Bapak ... & Ibu ...</p>
   </div>
 </section>
 
 <section class="fade">
   <div class="card">
-    <h2>📍 Lokasi</h2>
+    <h2>📅 Wektu & Papan</h2>
+    <p>Setu, 10 Mei 2026</p>
+    <p>Pukul 10.00 WIB</p>
     <p>Gedung Serbaguna</p>
-    <a class="btn" href="https://maps.google.com" target="_blank">Lihat Maps</a>
+    <a class="btn" href="https://maps.google.com" target="_blank">Deleng Lokasi</a>
   </div>
 </section>
 
 <section class="fade">
   <div class="card">
-    <h2>💌 Ucapan & Doa</h2>
-    <p>Semoga menjadi keluarga sakinah mawaddah warahmah</p>
+    <h2>💍 Pangajab</h2>
+    <p>
+    Mugi-mugi tansah pinaringan berkah  
+    lan dados kulawarga sakinah, mawaddah, warahmah.
+    </p>
   </div>
 </section>
+
+<section class="fade">
+  <div class="card">
+    <h2>🙏 Panutup</h2>
+    <p>
+    Mugi kersa rawuh lan maringi donga pangestu  
+    dhumateng penganten.
+    </p>
+    <p><b>Matur nuwun</b></p>
+  </div>
+</section>
+
+</div>
 
 <script>
 const fades = document.querySelectorAll('.fade');
